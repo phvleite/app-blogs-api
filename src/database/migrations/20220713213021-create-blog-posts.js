@@ -9,18 +9,35 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      createdAt: {
+      content: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        }
+      },
+      published: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated: {
         allowNull: false,
         type: Sequelize.DATE
       }
+    }, {
+      createdAt: false,
+      updatedAt: false,
     });
   },
+  
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('BlogPosts');
   }
