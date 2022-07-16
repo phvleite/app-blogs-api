@@ -1,26 +1,27 @@
-const Joi = require('joi');
+// const Joi = require('joi');
 const db = require('../database/models');
 const jwtService = require('./jwtService');
-const { runSchema } = require('./validators');
-
-console.log(Joi);
-console.log(db);
+// const { runSchema } = require('./validators');
 
 const authService = {
-  validateBody: runSchema(Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required().min(6),
-  })),
+  validateBody: ({ email, password }) => {
+    if (!email || !password) {
+      const e = new Error('Some required fields are missing');
+      e.name = 'ValidationError';
+      throw e;
+    }
+    return { email, password };
+  },
 
   login: async (email, passwordBody) => {
     const user = await db.User.findOne({
-      attributes: { exclude: ['id', 'displayName', 'image'] },
+      attributes: { exclude: ['id', 'displayName', 'image', 'createdAt', 'updatedAt'] },
       where: { email },
     });
 
     if (!user || user.password !== passwordBody) {
       const e = new Error('Invalid fields');
-      e.name = 'UnauthorizedError';
+      e.name = 'ValidationError';
       throw e;
     }
 

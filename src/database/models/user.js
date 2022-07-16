@@ -2,7 +2,12 @@ const sequelize = require('sequelize');
 
 const User = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     displayName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -11,12 +16,12 @@ const User = (sequelize, DataTypes) => {
     tableName: 'Users',
   });
 
-  User.associate = (db) => {
-    User.hasMany(db.BlogPosts, {
-      as: 'BlogPosts',
-      foreignKey: 'userId'
-    });
-  }
+  // User.associate = (db) => {
+  //   User.hasMany(db.BlogPosts, {
+  //     as: 'BlogPosts',
+  //     foreignKey: 'userId'
+  //   });
+  // }
 
   return User;
 };
