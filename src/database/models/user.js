@@ -14,6 +14,8 @@ const User = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
   }, {
     tableName: 'Users',
+    createdAt: false,
+    updatedAt: false,
   });
 
   // User.associate = (db) => {
