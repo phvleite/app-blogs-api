@@ -12,6 +12,13 @@ const userController = {
     const users = await userService.list();
     res.status(200).json(users);
   },
+
+  getById: async (req, res) => {
+    const { id } = userService.validateParamsId(req.params);
+    await userService.checkIfExistsId(id);
+    const user = await userService.getById(id);
+    res.status(200).json(user);
+  },
 };
 
 module.exports = userController;
