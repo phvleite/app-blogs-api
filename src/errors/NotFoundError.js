@@ -5,6 +5,7 @@ class NotFoundError extends Error {
 
     switch (message) {
       case 'User already registered': this.code = 409; break;
+      case 'Category already registered': this.code = 409; break;
       case 'Token not found': this.code = 401; break;
       case 'Expired or invalid token': this.code = 401; break;
       default: this.code = 404; break;
