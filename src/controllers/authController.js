@@ -10,9 +10,9 @@ const authController = {
     res.status(200).json({ token });
   },
 
-  validateToken: (req, _res, next) => {
+  validateToken: (req, res, next) => {
     const { authorization } = req.headers;
-
+    jwtService.existsToken(authorization);
     jwtService.validateToken(authorization);
 
     next();

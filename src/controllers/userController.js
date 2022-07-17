@@ -7,6 +7,11 @@ const userController = {
     const token = await userService.create({ displayName, email, password, image });
     res.status(201).json({ token });
   },
+
+  list: async (_req, res) => {
+    const users = await userService.list();
+    res.status(200).json(users);
+  },
 };
 
 module.exports = userController;
