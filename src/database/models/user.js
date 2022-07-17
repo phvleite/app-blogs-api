@@ -14,16 +14,15 @@ const User = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
   }, {
     tableName: 'Users',
-    createdAt: false,
-    updatedAt: false,
+    timestamps: false,
   });
 
-  // User.associate = (db) => {
-  //   User.hasMany(db.BlogPosts, {
-  //     as: 'BlogPosts',
-  //     foreignKey: 'userId'
-  //   });
-  // }
+  User.associate = (db) => {
+    User.hasMany(db.BlogPost, {
+      as: 'BlogPosts',
+      foreignKey: 'userId'
+    });
+  }
 
   return User;
 };

@@ -11,8 +11,7 @@ const Category = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   }, {
     tableName: 'Categories',
-    createdAt: false,
-    updatedAt: false,
+    timestamps: false,
   });
 
   return Category;

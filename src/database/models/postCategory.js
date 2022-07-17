@@ -15,8 +15,7 @@ const PostCategory = (sequelize, DataTypes) => {
     },
   }, {
     tableName: 'PostCategories',
-    createdAt: false,
-    updatedAt: false,
+    timestamps: false,
   });
 
   // PostCategory.associate = (db) => {
