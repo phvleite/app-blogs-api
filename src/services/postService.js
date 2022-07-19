@@ -22,6 +22,15 @@ const postService = {
     categoryIds: Joi.array().required().min(1).items(Joi.number().integer().min(1)),
   })),
 
+  checkIfExistsId: async (id) => {
+    const exists = await db.BlogPost.findOne({ where: { id } });
+
+    if (!exists) {
+      const message = 'Post does not exist';
+      throw new NotFoundError(message);
+    }
+  },
+
   create: async ({ title, content, categoryIds, userId }) => {
     let blogPost;
     await sequelize.transaction(async (t) => {
@@ -58,6 +67,23 @@ const postService = {
     ],
     });
     return listOfPosts;
+  },
+
+  getById: async (id) => {
+    const post = db.BlogPost.findByPk(id, {
+      include: [
+      {
+        model: db.User,
+        as: 'user',
+        attributes: { exclude: ['password'] },
+      },
+      {
+        model: db.Category,
+        as: 'categories',
+      },
+    ],
+    });
+    return post;
   },
 };
 

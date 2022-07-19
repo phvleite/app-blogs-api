@@ -18,12 +18,12 @@ const postController = {
     res.status(200).json(listOfPosts);
   },
 
-  // getById: async (req, res) => {
-  //   const { id } = userService.validateParamsId(req.params);
-  //   await userService.checkIfExistsId(id);
-  //   const user = await userService.getById(id);
-  //   res.status(200).json(user);
-  // },
+  getById: async (req, res) => {
+    const { id } = postService.validateParamsId(req.params);
+    await postService.checkIfExistsId(id);
+    const post = await postService.getById(id);
+    res.status(200).json(post);
+  },
 };
 
 module.exports = postController;
