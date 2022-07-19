@@ -42,6 +42,23 @@ const postService = {
     });
     return blogPost.dataValues;
   },
+
+  list: async () => {
+    const listOfPosts = db.BlogPost.findAll({
+      include: [
+      {
+        model: db.User,
+        as: 'user',
+        attributes: { exclude: ['password'] },
+      },
+      {
+        model: db.Category,
+        as: 'categories',
+      },
+    ],
+    });
+    return listOfPosts;
+  },
 };
 
 module.exports = postService;

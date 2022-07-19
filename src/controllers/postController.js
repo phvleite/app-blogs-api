@@ -13,10 +13,10 @@ const postController = {
     res.status(201).json(blogPost);
   },
 
-  // list: async (_req, res) => {
-  //   const users = await userService.list();
-  //   res.status(200).json(users);
-  // },
+  list: async (_req, res) => {
+    const listOfPosts = await postService.list();
+    res.status(200).json(listOfPosts);
+  },
 
   // getById: async (req, res) => {
   //   const { id } = userService.validateParamsId(req.params);
