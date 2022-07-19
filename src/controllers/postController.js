@@ -10,7 +10,6 @@ const postController = {
     const { title, content, categoryIds } = postService.validateBody(req.body);
     await categoryService.checkIfExistsByArrayOfId(categoryIds);
     const blogPost = await postService.create({ title, content, categoryIds, userId: data.id });
-    console.log({ blogPost });
     res.status(201).json(blogPost);
   },
 

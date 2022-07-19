@@ -33,8 +33,7 @@ const categoryService = {
     }
   },
 
-  async checkIfExistsByArrayOfId(arrayOfId) {
-    console.log(arrayOfId);
+  checkIfExistsByArrayOfId: async (arrayOfId) => {
     const categories = await db.Category.findAll({
       where: { id: arrayOfId },
     });
@@ -42,8 +41,6 @@ const categoryService = {
     if (!categories.length) throw new NotFoundError('"categoryIds" not found');
 
     const listOfCategoriesId = categories.map((category) => category.id);
-
-    console.log(listOfCategoriesId);
 
     for (let i = 0; i < arrayOfId.length; i += 1) {
       if (!listOfCategoriesId.includes(arrayOfId[i])) {

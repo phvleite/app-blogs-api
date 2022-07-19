@@ -39,8 +39,6 @@ const postService = {
       });
       
       await db.PostCategory.bulkCreate(listOfCategories, { transaction: t });
-
-      console.log(blogPost.dataValues);
     });
     return blogPost.dataValues;
   },
