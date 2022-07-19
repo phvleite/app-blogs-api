@@ -1,9 +1,9 @@
 const sequelize = require('sequelize');
-// const BlogPost = require('./blogPost');
-// const Category = require('./category');
 
 const PostCategory = (sequelize, DataTypes) => {
-  const PostCategory = sequelize.define('PostCategory', {
+  const PostCategory = sequelize.define(
+    'PostCategory',
+    {
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false,

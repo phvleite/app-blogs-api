@@ -1,7 +1,5 @@
-// const Joi = require('joi');
 const db = require('../database/models');
 const jwtService = require('./jwtService');
-// const { runSchema } = require('./validators');
 
 const authService = {
   validateBody: ({ email, password }) => {
@@ -15,7 +13,7 @@ const authService = {
 
   login: async (email, passwordBody) => {
     const user = await db.User.findOne({
-      attributes: { exclude: ['id', 'displayName', 'image', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['displayName', 'image', 'createdAt', 'updatedAt'] },
       where: { email },
     });
 
