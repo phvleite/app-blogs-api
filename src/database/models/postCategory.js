@@ -25,13 +25,17 @@ const PostCategory = (sequelize, DataTypes) => {
        through: PostCategory,
        foreignKey: 'categoryId',
        otherKey: 'postId',
-    });
+       onDelete: 'CASCADE',
+       onUpdate: 'CASCADE',
+     });
     db.Category.belongsToMany(db.BlogPost, {
        as: 'BlogPost',
        through: PostCategory,
        foreignKey: 'postId',
        otherKey: 'categoryId',
-    });
+       onDelete: 'CASCADE',
+       onUpdate: 'CASCADE',
+      });
   }
 
   return PostCategory;

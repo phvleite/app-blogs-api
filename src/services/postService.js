@@ -111,6 +111,13 @@ const postService = {
     await db.BlogPost.update({ title, content }, { where: { id } });
   },
 
+  remove: async ({ id }) => {
+    await sequelize.transaction(async (t) => {
+      const postId = id;
+      await db.PostCategory.destroy({ where: { postId }, transaction: t });
+      await db.BlogPost.destroy({ where: { id }, transaction: t });
+    });
+  },
 };
 
 module.exports = postService;

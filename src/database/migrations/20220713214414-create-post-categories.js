@@ -23,6 +23,8 @@ module.exports = {
     }, {
       createdAt: false,
       updatedAt: false,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
 

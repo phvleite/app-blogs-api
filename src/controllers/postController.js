@@ -26,6 +26,16 @@ const postController = {
     res.status(200).json(upPost);
   },
 
+  remove: async (req, res) => {
+    const { id } = postService.validateParamsId(req.params);
+    const userId = await postService.checkIfExistsId(id);
+    const { authorization } = req.headers;
+    const { data } = jwtService.validateToken(authorization);
+    postService.validatePostUser(userId, data.id);
+    await postService.remove({ id });
+    res.status(204).json();
+  },
+
   list: async (_req, res) => {
     const listOfPosts = await postService.list();
     res.status(200).json(listOfPosts);
