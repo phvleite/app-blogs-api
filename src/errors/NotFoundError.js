@@ -12,6 +12,10 @@ const messageError = [
     code: 401,
   },
   {
+    error: 'Unauthorized user',
+    code: 401,
+  },
+  {
     error: 'Expired or invalid token',
     code: 401,
   },

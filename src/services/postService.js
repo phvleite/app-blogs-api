@@ -16,10 +16,29 @@ const postService = {
     }
   },
 
+  validatePostUpdate: ({ title, content }) => {
+    if (!title || !content) {
+      const message = 'Some required fields are missing';
+      throw new NotFoundError(message);
+    }
+  },
+
+  validatePostUser: (userId, id) => {
+    if (userId !== id) {
+      const message = 'Unauthorized user';
+      throw new NotFoundError(message);
+    }
+  },
+
   validateBody: runSchema(Joi.object({
     title: Joi.string().required().min(8),
     content: Joi.string().required().min(8),
     categoryIds: Joi.array().required().min(1).items(Joi.number().integer().min(1)),
+  })),
+
+  validateBodyUpdate: runSchema(Joi.object({
+    title: Joi.string().required().min(8),
+    content: Joi.string().required().min(8),
   })),
 
   checkIfExistsId: async (id) => {
@@ -29,6 +48,8 @@ const postService = {
       const message = 'Post does not exist';
       throw new NotFoundError(message);
     }
+
+    return exists.dataValues.userId;
   },
 
   create: async ({ title, content, categoryIds, userId }) => {
@@ -85,6 +106,11 @@ const postService = {
     });
     return post;
   },
+
+  update: async ({ title, content, id }) => {
+    await db.BlogPost.update({ title, content }, { where: { id } });
+  },
+
 };
 
 module.exports = postService;
